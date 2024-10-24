@@ -21,7 +21,7 @@ const addReplyButtons = () => {
                             const tweetId = match[1];
                             const replyText = encodeURIComponent(processTweetText(tweetTextContent));
                             const replyUrl = `https://twitter.com/intent/tweet?in_reply_to=${tweetId}&text=${replyText}`;
-                            window.open(replyUrl, '____AAAAAAAAAAAAAAAAAAAAA');
+                            window.open(replyUrl, '____AAAAAAAAAAAAAAAAAAAAA', 'width=900,height=700');
                         };
                     };
                 } else {
@@ -29,12 +29,15 @@ const addReplyButtons = () => {
                 };
             };
 
+            // this makes it sorta browser agnostic chrome / firefox
+            const browserInstance = typeof browser !== 'undefined' ? browser : chrome;
+
             const spongeButton = document.createElement('img');
+            spongeButton.src = browserInstance.runtime.getURL('img/icon.png');
             spongeButton.className = customClassName;
             spongeButton.onclick = onClickCallback;
             spongeButton.width = '24px';
             spongeButton.height = '24px';
-            spongeButton.src = 'https://ibb.co/gm6WTLw';
             spongeButton.style.marginLeft = '7px';
             spongeButton.style.marginBottom = '3px';
             spongeButton.style.width = '24px';
@@ -46,12 +49,10 @@ const addReplyButtons = () => {
 }
 
 const processTweetText = (tweetTextContent) => {
-    // chars/words that won't be spongified, such as twitter handles, emoji ranges, urls and emails
+    // chars/words that won't be spongified, such as twitter handles, emoji ranges, urls, emails and new line characters
     const excludeRegex = /(@\w+|https?:\/\/\S+|\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b|[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]|\n+|\s+)/gu;
-
     // remove media
     const removeRegex = /pic\.x\.com\/\w+/g;
-
     // split at word boundary
     const splitRegex = /\b/g;
 
@@ -61,6 +62,7 @@ const processTweetText = (tweetTextContent) => {
 
     const spongify = (text) => {
         if (Math.random() > 0.5) {
+            // this so randomizes initial char being upper or lowercase
             text = ' ' + text;
         }
 
@@ -113,6 +115,7 @@ const extractTweetContent = (tweetElement) => {
                 // If it's just text, just add it
                 finalString += child.textContent;
             } else if (child.nodeType === Node.ELEMENT_NODE) {
+                // add emojis
                 if (child.tagName === 'IMG' && child.hasAttribute('alt')) {
                     finalString += child.alt;
                 } else {

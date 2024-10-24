@@ -12,6 +12,17 @@
         "48": "img/icon.png",
         "128": "img/icon.png"
     },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "img/icon.png"
+            ],
+            "matches": [
+                "*://*.twitter.com/*",
+                "*://*.x.com/*"
+            ]
+        }
+    ],
     "content_scripts": [
         {
             "matches": [
