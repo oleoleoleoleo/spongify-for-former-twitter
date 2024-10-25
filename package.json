@@ -1,0 +1,18 @@
+{
+  "name": "spongify-for-twitter-current-x",
+  "version": "1.0.0",
+  "description": "The enabler of the ultimate twitter experience.",
+  "scripts": {
+    "build": "mkdir -p dist && cd src && zip -r ../dist/spongify.zip ./* "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleoleoleoleo/spongify-for-former-twitter.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oleoleoleoleo/spongify-for-former-twitter/issues"
+  },
+  "homepage": "https://github.com/oleoleoleoleo/spongify-for-former-twitter#readme"
+}
