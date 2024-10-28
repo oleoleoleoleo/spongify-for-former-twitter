@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The enabler of the ultimate twitter experience.",
   "scripts": {
-    "build": "mkdir -p dist && cd src && zip -r ../dist/spongify.zip ./* "
+    "build": "./scripts/build.sh"
   },
   "repository": {
     "type": "git",
